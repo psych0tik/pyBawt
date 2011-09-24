@@ -11,7 +11,8 @@ def rebuild_bModules():
     # Module directory
     modules = [os.path.join(MODULE_DIRECTORY, i) for i in os.listdir(MODULE_DIRECTORY)]
     if os.path.exists(LOCAL_MODULES):
-        modules.append(os.path.join(LOCAL_MODULES, i) for i in os.listdir(LOCAL_MODULES)
+        for i in os.listdir(LOCAL_MODULES):
+            modules.append(os.path.join(LOCAL_MODULES, i))
     modules.sort()
     modules.append(CONFIG)
     for i in modules:
