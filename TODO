@@ -1,0 +1,17 @@
+This code will become the new trunk soon.
+
+I see no reason to maintain the legacy crap.
+
+TODO
+----
+
+Flesh out the API to let it do everything
+
+More verbose admin commands
+
+Handler for adding modules to other channels
+
+Handler for telling the bot what to do
+
+BUG: python2.6 won't create an args module which breaks the auto restart code
+

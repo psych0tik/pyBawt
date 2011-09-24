@@ -1,0 +1,10 @@
+host            =   irc.psych0tik.net
+ssl             =   True
+nick            =   YourBotNick
+port            =   6697
+auth_host       =   YourHost
+auth_hash       =   [md5sumhere]
+channels        =   #testcannel
+nickserv_nick   =   nickserv
+nickserv_pass   =   nickservpassword
+
