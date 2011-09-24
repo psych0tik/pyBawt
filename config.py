@@ -42,19 +42,22 @@ keys = (('host', passthru),
         ('nickserv_pass', passthru)
        )
 
-with open(CONFIG_FILE) as fh:
-    for line in fh:
-        line = line.strip()
-        if line.startswith("#"):
-            # Ignore comments
-            continue
-        if not line:
-            continue
-        try:
-            key, value = map(lambda x: x.strip(),line.split('=', 1))
-            config[key] = value
-        except ValueError:
-            raise InvalidConfig, "Invalid key value pair at (FIXME Lineno)"
+try:
+    with open(CONFIG_FILE) as fh:
+        for line in fh:
+            line = line.strip()
+            if line.startswith("#"):
+                # Ignore comments
+                continue
+            if not line:
+                continue
+            try:
+                key, value = map(lambda x: x.strip(),line.split('=', 1))
+                config[key] = value
+            except ValueError:
+                raise InvalidConfig, "Invalid key value pair at (FIXME Lineno)"
+except IOError:
+    logging.fatal("Couldn't open %s" % (CONFIG_FILE))
 if not config:
     logging.error("Couldn't open config file")
     raise NoConfigFile
