@@ -14,7 +14,7 @@ class ModuleAlreadyLoaded(Exception):
     pass
 
 # TODO Split this out into core modules, and then import a set of user added
-# ones. BawtModule and the stuff to do reloads is all that needs to be global
+# ones. BawtM2 and the stuff to do reloads is all that needs to be global
 # TODO Work out how the channel infrastructure will work (structured
 # import?)(Circular ref??)
 # Implement something to reference these by name instead of type hax.

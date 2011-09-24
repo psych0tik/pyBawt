@@ -27,30 +27,6 @@ class Restart(Exception):
 class StopHandling(Exception):
     pass
 
-class BawtModule(object):
-    """This is a hax module, it just says hi to people"""
-    matcher_re = "hi %(nick)s"
-    matcher_flags = 0
-    _name = "BawtModule"
-    def __init__(self, parent, channel):
-        self.parent = parent
-        self.channel = channel
-        self.rehash()
-    def __repr__(self):
-        return self._name
-    def __str__(self):
-        return self._name
-    def rehash(self):
-        """Reconstruct matcher regex"""
-        self.matcher = re.compile(self.matcher_re % {'nick': self.parent.nick}, # ADD more as neededh
-                                  self.matcher_flags)
-    def want(self, msg):
-        # OLD API, compat
-        return self.matcher.search(msg.data_segment)
-
-    def handle(self, msg):
-        self.parent.privmsg(msg.replyto, "%s: Hi!" % (msg.nick))
-
 class BawtM2(object):
     """I'm a lazy programmer who doesn't write help files"""
 
