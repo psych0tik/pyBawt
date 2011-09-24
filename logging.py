@@ -33,7 +33,7 @@ def fixme(msg):
 
 def fatal(msg):
     log("F: %s" % fmt(msg))
-    sys.stderr.write(fmt(msg))
+    sys.stderr.write(fmt(msg) + "\n")
     exit(1)
 
 class Writer(object):
