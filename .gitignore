@@ -2,5 +2,6 @@ bModules.py
 *.pyc
 note_data*
 pyBawt.log
+pyBawt.conf
 authen.db
 modules.local.d/*
