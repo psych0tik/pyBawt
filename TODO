@@ -15,3 +15,5 @@ Handler for telling the bot what to do
 
 BUG: python2.6 won't create an args module which breaks the auto restart code
 
+
+Stick a minloglevel in the config
