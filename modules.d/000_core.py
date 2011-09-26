@@ -32,6 +32,7 @@ def with_auth(fail_message="%(nick)s: I don't know you"):
         def __(inst, msg):
             template_dict = { "nick": msg.nick }
             if not inst.parent.authenticator.authed(msg):
+                logging.info("%s attempted to %s without auth" % (msg.nick, msg.data_segment))
                 inst.parent.privmsg(msg.replyto, fail_message % (template_dict))
                 return False
             else:
