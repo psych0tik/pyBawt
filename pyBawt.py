@@ -50,12 +50,13 @@ net.auth_self(config.nickserv_nick, config.nickserv_pass)
 net._debug = True
 
 # Before we hit mainloop, write pidfile
-try:
-    fh = open('/tmp/pyBawt.pid', 'w')
-    fh.write(str(os.getpid()))
-    fh.close()
-except IOError:
-    logging.fatal("Couldn't write pidfile")
+if not debug:
+    try:
+        fh = open('/tmp/pyBawt.pid', 'w')
+        fh.write(str(os.getpid()))
+        fh.close()
+    except IOError:
+        logging.fatal("Couldn't write pidfile")
 
 try:
     for i in config.channels:
