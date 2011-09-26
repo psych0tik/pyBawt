@@ -43,7 +43,11 @@ def mangle(name):
     if len(name) < 8:
         name += "_"
     else:
-        name = name[:6] + "00"
+        try:
+            myno = int(name[7:])+1
+            name = "%s%.2i" % (name[:6], myno)
+        except ValueError:
+            name = name[:6] + "00"
     return name
 
 def _load_modules():
