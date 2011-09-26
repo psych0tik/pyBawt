@@ -31,6 +31,7 @@ def to_list(val):
 def passthru(val):
     return val
 # A tuple of tuples with a key and an transformer
+# Should modules be able to inject their own keys? Or should we just accept whatever and deal with it later?
 keys = (('host', passthru),
         ('ssl' , to_bool),
         ('nick', passthru),
