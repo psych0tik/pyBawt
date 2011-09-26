@@ -45,10 +45,8 @@ class SourceModule(BawtM2):
     privmsg_re = "^(!|%(nick)s:\s?)(%(commands)s)" % {'commands': "|".join(_commands),
             'nick': '%(nick)s'}
     _name = "SourceModule" 
+    @with_auth(fail_message="I don't know you")
     def handle_privmsg(self, msg):
-        if not self.auth(msg):
-            self.parent.privmsg(msg.replyto, "%s: I don't know you." % (msg.nick))
-            return
         argv = msg.data_segment.split(" ")
         if self.m.group(2) == "reload":
             status = self.parent.reload_modules()
@@ -76,10 +74,8 @@ class AdminModule(BawtM2):
     privmsg_re = "^(!|%(nick)s:\s?)(%(commands)s) ?" % {'commands': "|".join(_commands),
             'nick': '%(nick)s'}
     _name = "AdminModule" 
+    @with_auth(fail_message="I don't know you")
     def handle_privmsg(self, msg):
-        if not self.auth(msg):
-            self.parent.privmsg(msg.replyto, "%s: I don't know you." % (msg.nick))
-            return
         argv = msg.data_segment.split(" ")
         # TODO - Second argument for channel.
         # TODO - Hax at this to replace the argv[0] matching based on a regex group to pull the commnad
@@ -101,10 +97,8 @@ class DebugModule(BawtM2):
     _commands = ['version', 'nick', 'uname', 'dumpchans', 'argv' ]
     privmsg_re = "^!(%(commands)s)" % {'commands': "|".join(_commands)}
     _name = "DebugModule"
+    @with_auth(fail_message="I don't know you")
     def handle_privmsg(self, msg):
-        if not self.auth(msg):
-            self.parent.privmsg(msg.replyto, "%s: I don't know you." % (msg.nick))
-            return
         argv = msg.data_segment.split(" ")
         # TODO - Second argument for channel.
         if argv[0] == "!version":
@@ -146,11 +140,8 @@ class ChanModule(BawtM2):
     _commands = ['join', 'part', 'kick']
     privmsg_re = "^!(%(commands)s)" % {'commands': "|".join(_commands)}
     _name = "ChanModule"
+    @with_auth(fail_message="I don't know you")
     def handle_privmsg(self, msg):
-        if not self.auth(msg):
-            logging.info("%s attempted to %s without auth" % (msg.nick, msg.data_segment))
-            self.parent.privmsg(msg.replyto, "%s: I don't know you." % (msg.nick))
-            return
         argv = msg.data_segment.split(" ")
         if argv[0] == '!join':
             if len(argv) == 1:
