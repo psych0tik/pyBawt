@@ -73,6 +73,7 @@ for name, transformer in keys:
         exec('%s = %s' % (name, repr(transformer(config[name]))))
 
     except ValueError: #Probably port didn't translate
+        # Pull lineno, spit out useful error
         raise InvalidConfig
     except KeyError: #Didn't have a required key
         raise InvalidConfig, "Missing required key: %s" % (name)
