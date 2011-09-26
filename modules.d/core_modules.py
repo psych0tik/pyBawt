@@ -124,7 +124,7 @@ class DebugModule(BawtM2):
 class AddModule(BawtM2):
     privmsg_re = "^(!|%(nick)s:\s?)(add) ([^ ]*)"
     _name = "AddModule"
-    @self.authenticator.with_auth
+    @with_auth(fail_message="I don't know you")
     def handle_privmsg(self, msg):
         mod = self.m.group(3)
         try:
@@ -134,8 +134,8 @@ class AddModule(BawtM2):
             else:
                 self.parent.privmsg(msg.replyto, "No such module")
         except ModuleAlreadyLoaded:
-                logging.info("%s attempted to load duplicate module %s in %s" % (msg.nick, mod, msg.origin.lower()))
-                self.parent.privmsg(msg.replyto, "Module already loaded in this context")
+            logging.info("%s attempted to load duplicate module %s in %s" % (msg.nick, mod, msg.origin.lower()))
+            self.parent.privmsg(msg.replyto, "Module already loaded in this context")
         except IndexError:
             self.parent.privmsg(msg.replyto, "Module?")
 

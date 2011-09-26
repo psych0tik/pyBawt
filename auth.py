@@ -47,14 +47,3 @@ It is managed by AuthModule which tracks the server messages
             self.auth_data = pickle.load(fh)
         except IOError:
             self.auth_data = {}
-    def with_auth(self, fail_message="%(nick)s: I don't know you"):
-        def _(func):
-            def __(inst, msg):
-                template_dict = { "nick": msg.nick }
-                if not self.authed(msg):
-                    inst.parent.privmsg(msg.replyto, fail_message % (template_dict))
-                    return False
-                else:
-                    return func(msg)
-            return __
-        return _

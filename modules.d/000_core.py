@@ -27,6 +27,20 @@ class Restart(Exception):
 class StopHandling(Exception):
     pass
 
+def with_auth(fail_message="%(nick)s: I don't know you"):
+    def _(func):
+        def __(inst, msg):
+            template_dict = { "nick": msg.nick }
+            if not inst.parent.authenticator.authed(msg):
+                inst.parent.privmsg(msg.replyto, fail_message % (template_dict))
+                return False
+            else:
+                return func(inst, msg)
+        return __
+    return _
+
+
+
 class BawtM2(object):
     """I'm a lazy programmer who doesn't write help files"""
 
