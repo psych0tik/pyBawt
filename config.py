@@ -44,8 +44,10 @@ keys = (('host', passthru),
        )
 
 try:
+    lineno = 0
     with open(CONFIG_FILE) as fh:
         for line in fh:
+            lineno += 1
             line = line.strip()
             if line.startswith("#"):
                 # Ignore comments
@@ -56,7 +58,7 @@ try:
                 key, value = map(lambda x: x.strip(),line.split('=', 1))
                 config[key] = value
             except ValueError:
-                raise InvalidConfig, "Invalid key value pair at (FIXME Lineno)"
+                raise InvalidConfig, "Invalid key value pair at line %i" % (lineno)
 except IOError:
     logging.fatal("Couldn't open %s" % (CONFIG_FILE))
 if not config:
