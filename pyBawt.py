@@ -47,7 +47,6 @@ net = ircSocket.chatnet(config.host, port=config.port, use_ssl=config.ssl)
 nick = config.nick
 net.identify(nick)
 net.auth_self(config.nickserv_nick, config.nickserv_pass)
-net._debug = True
 
 # Before we hit mainloop, write pidfile
 if not debug:

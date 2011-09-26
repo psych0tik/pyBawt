@@ -97,7 +97,6 @@ class Message(object):
         self.name = None
         self.host = None
         self.numeric = False
-        self._debug = False
         self.source, self.event, self.data = msg.split(" ", 2)
         self.event = self.event.upper()
         self.replyto = None
@@ -168,7 +167,6 @@ class chatnet(object):
         self.auth_host = ''
         self.auth_hash = ''
         self.nick = ""
-        self._debug = False
 
         self.auth_host = config.auth_host
         self.auth_hash = config.auth_hash
@@ -283,10 +281,6 @@ class chatnet(object):
             out.append(i)
             out.append(repr(self.channels[i].modules))
         return out
-
-    def debug(self, msg):
-        if self._debug:
-            print msg
 
     def available_modules(self):
         out = []
