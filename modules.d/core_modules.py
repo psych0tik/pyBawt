@@ -19,6 +19,9 @@ class ModuleAlreadyLoaded(Exception):
 # import?)(Circular ref??)
 # Implement something to reference these by name instead of type hax.
 class WriteThing(object):
+    """Writethings are a loose wrapper around the IRC protocol for inbuilts
+    that look for a filehandle. Their primary usecase at the moment is dumping
+    a trackback over irc, but I'm sure there are other uses"""
     def __init__(self, writable, target):
         self.w = writable
         self.target = target
