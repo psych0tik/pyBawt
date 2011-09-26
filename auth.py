@@ -50,12 +50,11 @@ It is managed by AuthModule which tracks the server messages
     def with_auth(self, fail_message="%(nick)s: I don't know you"):
         def _(func):
             def __(inst, msg):
-                print "inside _"
                 template_dict = { "nick": msg.nick }
-                if not self.try_auth(msg):
+                if not self.authed(msg):
                     inst.parent.privmsg(msg.replyto, fail_message % (template_dict))
                     return False
                 else:
-                    func(msg)
+                    return func(msg)
             return __
         return _

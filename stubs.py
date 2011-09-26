@@ -10,3 +10,6 @@ class message(dict):
    #def __setattribute__(self, key, value):
    #    self[key] = value
     pass
+
+class ircSocket(dict):
+    pass
