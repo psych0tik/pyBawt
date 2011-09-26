@@ -38,7 +38,7 @@ class HelpModule(BawtM2):
             self.parent.privmsg(msg.replyto, "%s: help [module]" % (msg.nick))
 class SourceModule(BawtM2):
     """Contains the commands for interacting with pyBawts internal source management and update routines"""
-    _commands = ['reload', 'update', 'version']
+    _commands = ['reload', 'update', 'system-update', 'version']
     privmsg_re = "^(!|%(nick)s:\s?)(%(commands)s)" % {'commands': "|".join(_commands),
             'nick': '%(nick)s'}
     _name = "SourceModule" 
@@ -58,6 +58,8 @@ class SourceModule(BawtM2):
                 #traceback.print_tb(status, file=t)
                 traceback.print_exception(*status.args, file=t)
         elif self.m.group(2) == "update":
+            self.parent.privmsg(msg.replyto, ourgit.update_modules())
+        elif self.m.group(2) == "system-update":
             self.parent.privmsg(msg.replyto, ourgit.update_git())
         elif self.m.group(2) == "version":
             self.parent.privmsg(msg.replyto, "%(nick)s: %(version)s on %(branch)s" %

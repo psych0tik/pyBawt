@@ -35,6 +35,12 @@ def update_git():
     return data
     # TODO sanity check
 
+def update_modules():
+    data = oneline("git --git-dir=modules.local.d/git pull")
+    logging.info("Updated source to %s" % data)
+    return data
+    # TODO sanity check
+
 
 def checkout_git(branch):
     return oneline('git checkout %s' % branch)
