@@ -124,10 +124,8 @@ class DebugModule(BawtM2):
 class AddModule(BawtM2):
     privmsg_re = "^(!|%(nick)s:\s?)(add) ([^ ]*)"
     _name = "AddModule"
+    @self.authenticator.with_auth
     def handle_privmsg(self, msg):
-        if not self.auth(msg):
-            self.parent.privmsg(msg.replyto, "%s: I don't know you." % (msg.nick))
-            return
         mod = self.m.group(3)
         try:
             if self.parent.add_module(msg.origin.lower(), mod):
