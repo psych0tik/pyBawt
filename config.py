@@ -74,3 +74,5 @@ for name, transformer in keys:
 
     except ValueError: #Probably port didn't translate
         raise InvalidConfig
+    except KeyError: #Didn't have a required key
+        raise InvalidConfig, "Missing required key: %s" % (name)
