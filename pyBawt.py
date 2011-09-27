@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+"""This is the main entry point to pyBawt.
+
+The rest of the infrastructure ties together to make all the components of a
+working IRC bot, this is just one sample implementation"""
 
 ##
 # pyBawt is (Will be) released under the WTFPL
