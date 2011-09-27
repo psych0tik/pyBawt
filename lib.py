@@ -39,3 +39,6 @@ class Restart(Exception):
 class StopHandling(Exception):
     pass
 
+class ModuleAlreadyLoaded(Exception):
+    pass
+

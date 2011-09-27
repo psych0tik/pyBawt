@@ -5,13 +5,9 @@ import os
 import sys
 import atexit
 import traceback
-from lib import *
 import logging
 
 VERSION="$Rev: 1252 $".split(" ")[1]
-
-class ModuleAlreadyLoaded(Exception):
-    pass
 
 # TODO Split this out into core modules, and then import a set of user added
 # ones. BawtM2 and the stuff to do reloads is all that needs to be global
