@@ -7,6 +7,8 @@ import os
 import sys
 import logging
 
+from lib import *
+
 VERSION="$Rev: 1252 $".split(" ")[1]
 
 def get_help(mdl):
@@ -21,11 +23,6 @@ def get_help(mdl):
 
 # CORE
 #-----
-
-class Restart(Exception):
-    pass
-class StopHandling(Exception):
-    pass
 
 class BawtM2(object):
     """I'm a lazy programmer who doesn't write help files"""

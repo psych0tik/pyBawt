@@ -13,21 +13,7 @@ import signal
 import auth
 import logging
 
-class ModuleError(Exception):
-    pass
-
-class IrcDisconnected(Exception):
-    pass
-
-class IrcTerminated(Exception):
-    pass
-class FlushQueue(Exception):
-    """ Flush the event queue, don't wait for IO"""
-    pass
-class ModulesDidntLoadDueToSyntax(Exception):
-    def __nonzero__(self):
-        # This allows us to retain the logical "if status" test.
-        return False
+from lib import *
 
 def should_reconnect():
     """This hook lies in here because it'll give the rest of the structure a fairly central place
@@ -542,7 +528,7 @@ class Channel(object):
                     try:
                         # TODO - implement a signal stop
                         i.handle(msg)
-                    except bModules.StopHandling:
+                    except StopHandling:
                         break
 
 def SockConnect(host, port, use_ssl):        

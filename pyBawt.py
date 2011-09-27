@@ -22,6 +22,8 @@ import bModules
 import logging
 import traceback
 
+from lib import *
+
 logging.info("pyBawt started")
 
 # Have a crack at sweet argparsing
@@ -67,20 +69,20 @@ try:
     while True:
         try:
             net.recv_wait()
-        except ircSocket.FlushQueue:
+        except FlushQueue:
             pass
         net.dump_queue()
 except KeyboardInterrupt:
     logging.error("Shutting down due to user intervention")
     net.quit("Killed from terminal")
-except bModules.Restart:
+except Restart:
     # TODO Include the user who did this
     logging.error("Restarting due to user intervention")
     restart_stub()
-except ircSocket.IrcDisconnected:
+except IrcDisconnected:
     if ircSocket.should_reconnect():
         restart_stub()
-except ircSocket.IrcTerminated:
+except IrcTerminated:
     # Catch but don't handle, die gracefully
     pass
 except Exception:
