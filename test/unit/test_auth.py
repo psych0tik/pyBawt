@@ -29,6 +29,8 @@ auth_msg.nick = "richo"
 bad_msg = stubs.message()
 bad_msg.nick = "buttfayse"
 bad_msg.replyto = "buttfayse"
+bad_msg.data_segment = "badpassword"
+
 
 last_msg = ""
 fake_module = stubs.message()
