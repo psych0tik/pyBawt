@@ -11,16 +11,21 @@ working IRC bot, this is just one sample implementation"""
 ##
 
 # Rich Healey '08
+from lib import *
+import logging
+try:
+    import config
+except InvalidConfig as e:
+    logging.fatal("Couldn't load config file: %s" % (str(e)))
 
 import ircSocket
 import time
 import sys
 import os
 import random
-import config
 import bModules
-import logging
 import traceback
+
 
 logging.info("pyBawt started")
 
@@ -67,20 +72,20 @@ try:
     while True:
         try:
             net.recv_wait()
-        except ircSocket.FlushQueue:
+        except FlushQueue:
             pass
         net.dump_queue()
 except KeyboardInterrupt:
     logging.error("Shutting down due to user intervention")
     net.quit("Killed from terminal")
-except bModules.Restart:
+except Restart:
     # TODO Include the user who did this
     logging.error("Restarting due to user intervention")
     restart_stub()
-except ircSocket.IrcDisconnected:
+except IrcDisconnected:
     if ircSocket.should_reconnect():
         restart_stub()
-except ircSocket.IrcTerminated:
+except IrcTerminated:
     # Catch but don't handle, die gracefully
     pass
 except Exception:

@@ -8,11 +8,8 @@ __all__ = []
 
 import logging
 import os
+from lib import *
 
-class InvalidConfig(Exception):
-    pass
-class NoConfigFile(Exception):
-    pass
 
 
 CONFIG_FILE = 'pyBawt.conf'
@@ -56,7 +53,7 @@ try:
                 continue
             try:
                 key, value = map(lambda x: x.strip(),line.split('=', 1))
-                config[key] = value
+                config[key] = (value, lineno)
             except ValueError:
                 raise InvalidConfig, "Invalid key value pair at line %i" % (lineno)
 except IOError:
@@ -68,12 +65,11 @@ if not config:
 for name, transformer in keys:
     __all__.append(name)
     try:
-        # This is fucked XXX FIXME
-        #__dict__[name] = transformer(config[name])
-        exec('%s = %s' % (name, repr(transformer(config[name]))))
+        val, line = config[name]
+        exec('%s = %s' % (name, repr(transformer(val))))
 
     except ValueError: #Probably port didn't translate
         # Pull lineno, spit out useful error
-        raise InvalidConfig
+        raise InvalidConfig, "Counldn't parse %s on line %i" % (val, line)
     except KeyError: #Didn't have a required key
         raise InvalidConfig, "Missing required key: %s" % (name)
