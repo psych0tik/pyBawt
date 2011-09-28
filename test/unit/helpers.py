@@ -2,7 +2,7 @@
 import os
 import sys
 
-reset = "[39m"
+reset = "[0m"
 def red(text):
     red = "[31m"
     return "%s%s%s" % (red, text, reset)

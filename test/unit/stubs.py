@@ -5,3 +5,5 @@ class message(dict):
 
 class ircSocket(dict):
     pass
+
+# TODO - Config

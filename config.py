@@ -8,11 +8,8 @@ __all__ = []
 
 import logging
 import os
+from lib import *
 
-class InvalidConfig(Exception):
-    pass
-class NoConfigFile(Exception):
-    pass
 
 
 CONFIG_FILE = 'pyBawt.conf'
@@ -31,6 +28,7 @@ def to_list(val):
 def passthru(val):
     return val
 # A tuple of tuples with a key and an transformer
+# Should modules be able to inject their own keys? Or should we just accept whatever and deal with it later?
 keys = (('host', passthru),
         ('ssl' , to_bool),
         ('nick', passthru),
@@ -43,8 +41,10 @@ keys = (('host', passthru),
        )
 
 try:
+    lineno = 0
     with open(CONFIG_FILE) as fh:
         for line in fh:
+            lineno += 1
             line = line.strip()
             if line.startswith("#"):
                 # Ignore comments
@@ -53,9 +53,9 @@ try:
                 continue
             try:
                 key, value = map(lambda x: x.strip(),line.split('=', 1))
-                config[key] = value
+                config[key] = (value, lineno)
             except ValueError:
-                raise InvalidConfig, "Invalid key value pair at (FIXME Lineno)"
+                raise InvalidConfig, "Invalid key value pair at line %i" % (lineno)
 except IOError:
     logging.fatal("Couldn't open %s" % (CONFIG_FILE))
 if not config:
@@ -65,9 +65,11 @@ if not config:
 for name, transformer in keys:
     __all__.append(name)
     try:
-        # This is fucked XXX FIXME
-        #__dict__[name] = transformer(config[name])
-        exec('%s = %s' % (name, repr(transformer(config[name]))))
+        val, line = config[name]
+        exec('%s = %s' % (name, repr(transformer(val))))
 
     except ValueError: #Probably port didn't translate
-        raise InvalidConfig
+        # Pull lineno, spit out useful error
+        raise InvalidConfig, "Counldn't parse %s on line %i" % (val, line)
+    except KeyError: #Didn't have a required key
+        raise InvalidConfig, "Missing required key: %s" % (name)

@@ -7,6 +7,8 @@ import os
 import sys
 import logging
 
+from lib import *
+
 VERSION="$Rev: 1252 $".split(" ")[1]
 
 def get_help(mdl):
@@ -21,11 +23,6 @@ def get_help(mdl):
 
 # CORE
 #-----
-
-class Restart(Exception):
-    pass
-class StopHandling(Exception):
-    pass
 
 def with_auth(fail_message="%(nick)s: I don't know you"):
     def _(func):
