@@ -8,11 +8,8 @@ __all__ = []
 
 import logging
 import os
+from lib import *
 
-class InvalidConfig(Exception):
-    pass
-class NoConfigFile(Exception):
-    pass
 
 
 CONFIG_FILE = 'pyBawt.conf'

@@ -11,18 +11,21 @@ working IRC bot, this is just one sample implementation"""
 ##
 
 # Rich Healey '08
+from lib import *
+import logging
+try:
+    import config
+except InvalidConfig:
+    logging.fatal("Couldn't load config file")
 
 import ircSocket
 import time
 import sys
 import os
 import random
-import config
 import bModules
-import logging
 import traceback
 
-from lib import *
 
 logging.info("pyBawt started")
 

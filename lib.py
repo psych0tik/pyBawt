@@ -42,3 +42,7 @@ class StopHandling(Exception):
 class ModuleAlreadyLoaded(Exception):
     pass
 
+class InvalidConfig(Exception):
+    pass
+class NoConfigFile(Exception):
+    pass
