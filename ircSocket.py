@@ -1,3 +1,4 @@
+from lib import *
 import threading
 import socket
 import sys
@@ -13,7 +14,6 @@ import signal
 import auth
 import logging
 
-from lib import *
 
 def should_reconnect():
     """This hook lies in here because it'll give the rest of the structure a fairly central place

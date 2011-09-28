@@ -47,3 +47,7 @@ class ModuleAlreadyLoaded(Exception):
     """Trying to load a module that's already active in this context"""
     pass
 
+class InvalidConfig(Exception):
+    pass
+class NoConfigFile(Exception):
+    pass
