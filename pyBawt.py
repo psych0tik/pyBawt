@@ -15,8 +15,8 @@ from lib import *
 import logging
 try:
     import config
-except InvalidConfig:
-    logging.fatal("Couldn't load config file")
+except InvalidConfig as e:
+    logging.fatal("Couldn't load config file: %s" % (str(e)))
 
 import ircSocket
 import time
