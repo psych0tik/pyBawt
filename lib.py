@@ -22,9 +22,11 @@ class ModuleError(Exception):
     pass
 
 class IrcDisconnected(Exception):
+    """IRC server closed connection"""
     pass
 
 class IrcTerminated(Exception):
+    """Irc session closed dilibrately"""
     pass
 class FlushQueue(Exception):
     """ Flush the event queue, don't wait for IO"""
@@ -35,10 +37,13 @@ class ModulesDidntLoadDueToSyntax(Exception):
         return False
 
 class Restart(Exception):
+    """Restart pyBawt, treat as being uncatchable"""
     pass
 class StopHandling(Exception):
+    """Bail out and stop trying to handle this event"""
     pass
 
 class ModuleAlreadyLoaded(Exception):
+    """Trying to load a module that's already active in this context"""
     pass
 
