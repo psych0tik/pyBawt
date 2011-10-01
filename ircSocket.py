@@ -133,6 +133,8 @@ class Message(object):
                 return True
         except TypeError:
             pass
+        except IndexError:
+            pass
         return False
 
     def __str__(self):
