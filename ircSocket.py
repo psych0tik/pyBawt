@@ -180,7 +180,7 @@ class chatnet(object):
         self.event_handlers = {
                 'JOIN': self.handle_join
                 }
-    
+
     def recv_wait(self):
 #This method pulls data back from the server and queues it for processing.
 #So far it's considerations are:
@@ -197,10 +197,10 @@ class chatnet(object):
         else:
             self.data = self._queue.pop()
         # continue with execution
-    
+
     def _handle(self, msg):
 # XXX This desperately needs fleshing out
-# if addressed to channel 
+# if addressed to channel
 #  -> locate channel object and add to queue
 #  -- If not joined to channel, add channel object and populate queue
 #  -> if in doubt, dump to main queue
@@ -292,7 +292,7 @@ class chatnet(object):
             self.identify(mangle(self.nick), self.nickserv_info)
             # This call is precariously close to becoming recursive.
             # Make sure that identify never has a direct call path here.
-        
+
     def auth_self(self, to, pas):
         # privmsg bypasses the chores code, it seems
         self.add_chore(self.privmsg, (to, "IDENTIFY %s" % pas))
@@ -486,7 +486,7 @@ class Channel(object):
         if len(self.modules) == l:
             raise ModuleError
         return
-    
+
     def add_msg(self, msg):
         self.queue.append(msg)
 
@@ -538,7 +538,7 @@ class Channel(object):
                     except StopHandling:
                         break
 
-def SockConnect(host, port, use_ssl):        
+def SockConnect(host, port, use_ssl):
     addr = (host, port)
     sock = None
     for res in socket.getaddrinfo(host, port, socket.AF_INET, socket.SOCK_STREAM):
