@@ -57,6 +57,9 @@ RE_NICK_MATCH = re.compile(r":([^! ]+)!([^@ ]+)@([A-Za-z0-9_\.-]+)")
 RE_INFO_MATCH = re.compile(r":([^! ]+)!([^@ ]+)@([A-Za-z0-9_\.-]+)")
 
 class irc_data(object):
+    """A proxy to coerce datatypes more appropriately for comparisons,
+    ultimately delegating to the data itself if it can't find anything better
+    to do with it"""
     def __init__(self, data):
         self.data = data
 
@@ -75,6 +78,7 @@ IRC_TOPIC = irc_data(332)
 
 
 class Message(object):
+    """Reprsentation of a single message from an ircd"""
     def __init__(self, msg):
         self.msg = msg
         self.data_segment = None
@@ -151,6 +155,7 @@ class Message(object):
         "--"])
 
 class chatnet(object):
+    """Representation of a single connection to an ircd"""
     def __init__(self, host, port=6667, use_ssl=False):
         self.auth_host = ''
         self.auth_hash = ''
