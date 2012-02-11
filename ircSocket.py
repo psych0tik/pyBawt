@@ -209,7 +209,7 @@ class chatnet(object):
 # The _handle method also need
 
         if msg.upper().startswith("PING"):
-            self.write(msg.upper().replace("PING", "PONG"))
+            self._write(msg.upper().replace("PING", "PONG"))
             return
         message = Message(msg)
         # Have code for catching identify here.
