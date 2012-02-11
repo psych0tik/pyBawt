@@ -4,5 +4,6 @@ class BroModule(BawtM2):
     _name = "BroModule"
 
     def handle_privmsg(self, msg):
-        if "bro" not in msg.data_segment:
+        data = msg.data_segment.lower()
+        if "bro" not in data and "brah" not in data:
             self.parent.kick(msg.replyto, msg.nick, "browned")
